@@ -101,9 +101,9 @@ class CORE_CONTROL():
 
     def read_table(self):
         # 用于读取ASDANEXCEL　表格的函数
-        if self.cmdlist[1] == "city":  # city table sign
+        if self.cmdlist[0] == "city":  # city table sign
             asdanExcelReader = ASDAN_EXCEL_REDER()
-            asdanExcelReader.path = self.cmdlist[0]
+            asdanExcelReader.path = self.cmdlist[1]
             asdanExcelReader.data = self.data
             asdanExcelReader.period = self.period
             self.data = asdanExcelReader.asdan_city_table()
@@ -116,7 +116,72 @@ class CORE_CONTROL():
         if self.cmdlist[0] == "del":
             del self.memo_data[self.cmdlist[1]]
 
-    def list_all_memory(self):
+    def list_memory(self):
         # 用于输出程序内部变量的函数
-        if self.cmdlist[0] == "general" or self.cmdlist == []:
-            if self.cmdlist[1] 
+        if self.cmdlist[0] == "general":
+            if "path" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.path != "":
+                    print("[程序内部变量] self.path 存在并已使用")
+                else:
+                    print("[程序内部变量] self.path 没有被定义和使用")
+            if "data" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.data != {}:
+                    print("[程序内部变量] self.data 存在并已使用")
+                else:
+                    print("[程序内部变量] self.data 没有被定义和使用")
+            if "period" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.period != "1":
+                    print("[程序内部变量] self.period 值为{}".format(self.period))
+                else:
+                    print("[程序内部变量] self.period 值为1 初始值")
+            if "variate" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.memo_data != {}:
+                    print("[程序内部变量] self.memo 已被使用")
+                    print("其结构键含有：")
+                    for key_name in self.memo.keys():
+                        print("[memo 内键] {}".format(key_name))
+                else:
+                    print("[程序内部变量] self.memo 没有被定义和使用")
+            if "ana" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.ana_data != {}:
+                    print("[程序内部变量] self.ana_data 存在并已使用")
+                else:
+                    print("[程序内部变量] self.ana_data 没有被定义和使用")
+
+        if self.cmdlist[0] == "detail": 
+            if "path" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.path != "":
+                    print("[程序内部变量] self.path 存在并已使用")
+                    print("[变量值] {}".format(self.path))
+                else:
+                    print("[程序内部变量] self.path 没有被定义和使用")
+            if "period" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.period != "1":
+                    print("[程序内部变量] self.period 值为{}".format(self.period))
+                    print("[变量值] {}".format(self.period))
+                else:
+                    print("[程序内部变量] self.period 值为1 初始值")
+            if "variate" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.memo_data != {}:
+                    print("[程序内部变量] self.memo 已被使用")
+                    input("按下任意键 输出memo数据结构")
+                    data = json.dumps(self.memo_data, indent=4,ensure_ascii=False, sort_keys=False,separators=(',', ':'))
+                    print(data)
+                else:
+                    print("[程序内部变量] self.memo 没有被定义和使用")
+            if "ana" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.ana_data != {}:
+                    print("[程序内部变量] self.ana_data 存在并已使用")
+                    input("按下任意键 输出ana_data数据结构")
+                    data = json.dumps(self.ana_data, indent=4,ensure_ascii=False, sort_keys=False,separators=(',', ':'))
+                    print(data)
+                else:
+                    print("[程序内部变量] self.ana_data 没有被定义和使用")
+            if "data" in self.cmdlist or len(self.cmdlist) == 1:
+                if self.data != {}:
+                    print("[程序内部变量] self.data 存在并已使用")
+                    input("按下任意键 输出data数据结构")
+                    data = json.dumps(self.data, indent=4,ensure_ascii=False, sort_keys=False,separators=(',', ':'))
+                    print(data)
+                else:
+                    print("[程序内部变量] self.data 没有被定义和使用")

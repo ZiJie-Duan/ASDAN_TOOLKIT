@@ -48,6 +48,12 @@ def cmd_control(cmd,cmdlist,core):
 
     if cmd == "sv_d":
         core.save_data()
+    
+    if cmd == "memo":
+        core.memo()
+    
+    if cmd == "ls_memory":
+        core.list_memory()
 
     if cmd == "set_p":
         core.set_period()
@@ -63,7 +69,7 @@ def main():
     print("ASDAN 商赛辅助分析程序 v1.0 beta")
     print("作者：Peter Duan")
     core = CORE_CONTROL()
-
+    '''
     while True:
         user_cmd = input(">>")
         user_cmd_list = user_cmd.split(" ")
@@ -74,8 +80,8 @@ def main():
             cmdlist = user_cmd_list[1:]
         cmd_control(cmd,cmdlist,core)
         print("finish")
-
     '''
+    
     while True:
         try:
             user_cmd = input(">>")
@@ -88,6 +94,6 @@ def main():
             cmd_control(cmd,cmdlist,core)
         except:
             traceback.print_exc()#错误捕捉器
-    '''
+    
 
 main()
