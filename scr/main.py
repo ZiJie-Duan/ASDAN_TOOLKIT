@@ -94,6 +94,6 @@ def main():
             cmd_control(cmd,cmdlist,core)
         except:
             traceback.print_exc()#错误捕捉器
-    
+        print("finish")
 
 main()
