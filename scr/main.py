@@ -11,20 +11,28 @@ def cmd_control(cmd,cmdlist,core):
             """)
     if cmd == "initmemory":
         core.init_memory()
+
     if cmd == "rd_d":
         core.load_data()
+
     if cmd == "sv_d":
         core.save_data()
+
+    if cmd == "set_p":
+        core.set_period()
+
     if cmd == "TRA":
         core.read_table()
+
     if cmd == "initdata":
         core.init_data_structure()
+
 
 def main():
     print("ASDAN 商赛辅助分析程序 v1.0 beta")
     core = CORE_CONTROL()
-    while True:
 
+    while True:
         user_cmd = input(">>")
         user_cmd_list = user_cmd.split(" ")
         cmd = user_cmd_list[0]
@@ -33,6 +41,7 @@ def main():
         else:
             cmdlist = user_cmd_list[1:]
         cmd_control(cmd,cmdlist,core)
+        print("finish")
 
     '''
     while True:
