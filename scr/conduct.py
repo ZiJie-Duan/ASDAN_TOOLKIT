@@ -1,4 +1,9 @@
 
-for time in range(200):
-	print("\n这是第" + str(time) + "次问Helen数学作业")
-	print("Helen 你好！数学作业是什么？")
+class ASDAN_ANALYZER():
+
+    def __init__(self):
+        self.data = {} #用于运算的输入数据
+        self.result = {} #运算完成的表格绘制数据
+
+    def team_city_table_ana(self):
+        
