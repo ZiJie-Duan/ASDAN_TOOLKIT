@@ -1,5 +1,4 @@
 import xlrd
-import traceback
 
 
 class ASDAN_EXCEL_REDER():
@@ -14,12 +13,10 @@ class ASDAN_EXCEL_REDER():
 		self.period = period
 	
 
-	def init_table(self):
-		self.tables_data = xlrd.open_workbook(self.path)
-
-
 	#TRA [Translator] 定义
 	def asdan_city_table(self):	#阿斯丹 标准城市报表读取器
+
+		self.tables_data = xlrd.open_workbook(self.path)
 		
 		tables_name = self.tables_data.sheet_names()
 
