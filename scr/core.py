@@ -1,5 +1,7 @@
 import json
 from load import ASDAN_EXCEL_REDER
+from conduct import ASDAN_ANALYZER
+from result import ASDAN_TABLE_STYLE_RENDERING
 
 
 class MEMORY_CONTROL():
@@ -115,6 +117,29 @@ class CORE_CONTROL():
 
         if self.cmdlist[0] == "del":
             del self.memo_data[self.cmdlist[1]]
+
+    def analyzer(self):
+        # 算法
+        # 一个参数，指定 使用的算法
+        if self.cmdlist[0] == "JCT":
+            ana = ASDAN_ANALYZER()
+            ana.data = self.data
+            ana.period = self.period
+            self.ana_data = ana.Jason_team_city_table_ana()
+
+
+    def table_style_rendering(self):
+        #表格样式渲染器
+        if self.cmdlist[0] == "JCT":
+            if len(self.cmdlist) > 1:
+                tsr = ASDAN_TABLE_STYLE_RENDERING()
+                tsr.data = self.memo_data[self.cmdlist[1]]
+                tsr.Jason_team_city_table_ren()
+            else:
+                tsr = ASDAN_TABLE_STYLE_RENDERING()
+                tsr.data = self.ana_data
+                tsr.Jason_team_city_table_ren()
+
 
     def list_memory(self):
         # 用于输出程序内部变量的函数

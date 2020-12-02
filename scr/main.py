@@ -63,6 +63,12 @@ def cmd_control(cmd,cmdlist,core):
 
     if cmd == "initdata":
         core.init_data_structure()
+    
+    if cmd == "ANA":
+        core.analyzer()
+
+    if cmd == "TSR":
+        core.table_style_rendering()
 
 
 def main():
