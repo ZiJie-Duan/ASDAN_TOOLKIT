@@ -1,37 +1,8 @@
-import json
 from load import ASDAN_EXCEL_REDER
 from conduct import ASDAN_ANALYZER
 from result import ASDAN_TABLE_STYLE_RENDERING
-
-
-class MEMORY_CONTROL():
-    """
-    负责程序本体记忆
-    保存与读取
-    """
-
-    def __init__(self):
-        self.data = {}  # 记忆存储 数据
-        self.period = "1"  # 记忆存储 周期信息，时间
-        self.memo_data = {}  # 记忆存储 变量记忆存储器
-
-    def save_data(self, save_path):
-        # 全部存储模式
-        save_data_final = [self.data, self.period, self.memo_data]
-        with open(save_path, 'w') as content:
-            json.dump(save_data_final, content)
-
-    def load_data(self, load_path):
-        # 全部读取模式
-        all_data = []
-        with open(load_path) as content:
-            all_data = json.load(content)
-        self.data = all_data[0]
-        self.period = all_data[1]
-        self.memo_data = all_data[2]
-
-        return self.data, self.period, self.memo_data
-
+from assist import MEMORY_CONTROL
+from result import TABLE_WRITER
 
 class CORE_CONTROL():
     """
@@ -130,16 +101,56 @@ class CORE_CONTROL():
 
     def table_style_rendering(self):
         #表格样式渲染器
+        #cmdlist 可选填入，如果有参数，将会是memo的索引
         if self.cmdlist[0] == "JCT":
+            tsr = ASDAN_TABLE_STYLE_RENDERING()
             if len(self.cmdlist) > 1:
-                tsr = ASDAN_TABLE_STYLE_RENDERING()
                 tsr.data = self.memo_data[self.cmdlist[1]]
-                tsr.Jason_team_city_table_ren()
             else:
-                tsr = ASDAN_TABLE_STYLE_RENDERING()
                 tsr.data = self.ana_data
-                tsr.Jason_team_city_table_ren()
+            self.ana_data = tsr.Jason_team_city_table_ren()
+            
 
+    def table_writer(self):
+        '''
+        表格写入器，此函数具有相对较为特殊的参数传入机制
+        cmdlist 具有两个参数，分别为 表格绝对路径 和 memo命令控制器
+        '''
+        data = {}
+        data["file_path"] = self.cmdlist[0]
+        data["shells"] = []
+        if len(self.cmdlist) > 1:
+            if self.cmdlist[1] == "memo":
+                print("memo 内存提取器")
+                print("已存储的变量（注意请选择可绘制数据）：")
+                js = 0
+                data_of_memo = {}
+                for name, data in self.memo_data.items():
+                    js += 1
+                    data_of_memo[str(js)] = data
+                    print(" {} 变量名 {}".format(str(js),name))
+                
+                while True:
+                    shell_data_dic = {}
+                    number = input("输入编号选择（输入q退出）：")
+                    if number == "q":
+                        break
+                    name = input("表格名称：")
+                    shell_data_dic[name] = name
+                    shell_data_dic["data"] = data_of_memo[number]
+                    data["shells"].append(shell_data_dic)
+        else:
+            shell_data_dic = {}
+            name = input("表格名称：")
+            shell_data_dic["name"] = name
+            shell_data_dic["data"] = self.ana_data
+            data["shells"].append(shell_data_dic)
+
+        table = TABLE_WRITER()
+        table.table_data = data
+        table.write()
+    
+    
 
     def list_memory(self):
         # 用于输出程序内部变量的函数
@@ -163,7 +174,7 @@ class CORE_CONTROL():
                 if self.memo_data != {}:
                     print("[程序内部变量] self.memo 已被使用")
                     print("其结构键含有：")
-                    for key_name in self.memo.keys():
+                    for key_name in self.memo_data.keys():
                         print("[memo 内键] {}".format(key_name))
                 else:
                     print("[程序内部变量] self.memo 没有被定义和使用")

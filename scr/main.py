@@ -70,6 +70,9 @@ def cmd_control(cmd,cmdlist,core):
     if cmd == "TSR":
         core.table_style_rendering()
 
+    if cmd == "creat_table":
+        core.table_writer()
+
 
 def main():
     print("ASDAN 商赛辅助分析程序 v1.0 beta")

@@ -1,3 +1,4 @@
+import xlwt
 
 class ASDAN_TABLE_STYLE_RENDERING():
 
@@ -36,7 +37,27 @@ class ASDAN_TABLE_STYLE_RENDERING():
             point_location_data.append([row+1,col,"Avg.Price"])
             point_location_data.append([row+2,col,avg_price])
         
+        return point_location_data
         
         
-        
-        
+class TABLE_WRITER():
+
+    def __init__(self):
+        self.table_data = {}
+
+    def write(self):
+        # 创建一个workbook 设置编码
+        workbook = xlwt.Workbook(encoding = 'utf-8')
+        # cmdlist memo, path
+        #memo 命令需要特殊解析
+        for table in self.table_data["shells"]:
+            # 创建一个worksheet
+            worksheet = workbook.add_sheet(table["name"])
+            for point_data in table["data"]:
+                # 写入excel
+                # 参数对应 行, 列, 值
+                worksheet.write(point_data[1],point_data[0], label = point_data[2])
+        # 保存
+        #workbook.save('Excel_test.xls')
+        workbook.save(self.table_data["file_path"])
+
