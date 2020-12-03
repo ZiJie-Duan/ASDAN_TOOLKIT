@@ -32,51 +32,83 @@ ASDAN 商赛辅助程序 使用教程
         type 为指定的变量，包含由["path","data","period","variate"]
         默认全选
 
+    set_p [period] ------ 用于设置程序时间（游戏周期）的函数
+        period 为一个数字
 
+    initdata ------- 根据周期生成数据结构
+
+    TRA [path] [translator] ------- 通过路径加载数据表
+        path 为数据表的绝对路径，包含文件的后缀
+        translator 为读取数据表所指定的数据加载器（翻译器）
+    
+    ANA [analyzer] ------- 对数据执行算法操作
+        analyzer 为指定的算法
+
+    TSR [rendering] ------- 使用表格渲染器对数据进行处理
+        rendering 为指定的渲染器
+
+    creat_table [path] ------- 生成报表
+        path 为指定文件的生成路径
 
     """)
 
 def cmd_control(cmd,cmdlist,core):
     core.cmdlist = cmdlist
     if cmd == "-h":
+        print("运行 帮助")
         helper()
-    if cmd == "initmemory":
+    elif cmd == "initmemory":
+        print("运行 初始化记忆")
         core.init_memory()
 
-    if cmd == "rd_d":
+    elif cmd == "rd_d":
+        print("运行 读取数据")
         core.load_data()
 
-    if cmd == "sv_d":
+    elif cmd == "sv_d":
+        print("运行 保存数据")
         core.save_data()
     
-    if cmd == "memo":
+    elif cmd == "memo":
+        print("运行 运行memo记忆")
         core.memo()
     
-    if cmd == "ls_memory":
+    elif cmd == "ls_memory":
+        print("运行 memory查看器")
         core.list_memory()
 
-    if cmd == "set_p":
+    elif cmd == "set_p":
+        print("运行 周期设置函数")
         core.set_period()
 
-    if cmd == "TRA":
+    elif cmd == "TRA":
+        print("运行 TRA 表格加载器")
         core.read_table()
 
-    if cmd == "initdata":
+    elif cmd == "initdata":
+        print("运行 初始化数据结构函数")
         core.init_data_structure()
     
-    if cmd == "ANA":
+    elif cmd == "ANA":
+        print("运行 ANA 核心算法")
         core.analyzer()
 
-    if cmd == "TSR":
+    elif cmd == "TSR":
+        print("运行 TSR 表格样式渲染器")
         core.table_style_rendering()
 
-    if cmd == "creat_table":
+    elif cmd == "creat_table":
+        print("运行 表格导出程序")
         core.table_writer()
+    
+    else:
+        print("命令无效")
 
 
 def main():
-    print("ASDAN 商赛辅助分析程序 v1.0 beta")
+    print("ASDAN 商赛辅助分析程序 v1.1 Beta")
     print("作者：Peter Duan")
+    print("初始化核心")
     core = CORE_CONTROL()
     '''
     while True:
@@ -90,10 +122,13 @@ def main():
         cmd_control(cmd,cmdlist,core)
         print("finish")
     '''
-    
+    print("进入cmd 控制循环")
     while True:
         try:
             user_cmd = input(">>")
+            if user_cmd == "q":
+                print("程序退出！")
+                break
             user_cmd_list = user_cmd.split(" ")
             cmd = user_cmd_list[0]
             if len(user_cmd_list) < 2:
@@ -102,7 +137,8 @@ def main():
                 cmdlist = user_cmd_list[1:]
             cmd_control(cmd,cmdlist,core)
         except:
+            print("\n程序发生致命错误！")
             traceback.print_exc()#错误捕捉器
-        print("finish")
+            print("按下回车继续")
 
 main()
