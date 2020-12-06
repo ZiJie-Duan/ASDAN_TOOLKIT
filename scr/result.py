@@ -44,6 +44,14 @@ class ASDAN_TABLE_STYLE_RENDERING():
             col = point_location["Vertical"][detail[1]]
         '''
         
+        for _, location in point_location["Horizontal"].items():
+            point_location_data.append([location,1,"Agents"])
+            point_location_data.append([location+1,1,"Marketing_Investment"])
+            point_location_data.append([location+2,1,"Product_Quality_Index"])
+            point_location_data.append([location+3,1,"Price"])
+            point_location_data.append([location+4,1,"Sales_Volume"])
+            point_location_data.append([location+5,1,"Market_Share"])
+        
         return point_location_data
         
         
