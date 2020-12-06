@@ -9,7 +9,7 @@ class ASDAN_TABLE_STYLE_RENDERING():
     def Jason_team_city_table_ren(self):
         point_location = {
             "Horizontal":{},
-            "vertical":{}
+            "Vertical":{}
             }
         table_style = self.data["table_style"]
 
@@ -25,7 +25,7 @@ class ASDAN_TABLE_STYLE_RENDERING():
             location += 6
         location = 2
         for location_sign in table_style["first_col"]:
-            point_location["vertical"][location_sign] = location
+            point_location["Vertical"][location_sign] = location
             #加入点位绘制列表，注意，这个循环绘制的是竖直方向的数值，所以，location为行
             point_location_data.append([0,int(location),location_sign])
             location += 1
@@ -36,6 +36,13 @@ class ASDAN_TABLE_STYLE_RENDERING():
             #绘制平均价格到表格中
             point_location_data.append([row+1,col,"Avg.Price"])
             point_location_data.append([row+2,col,avg_price])
+        '''
+        for detail in self.data["content"]:
+            #描点数据填充
+            #注意加入表格读入大小写统一
+            row = point_location["Horizontal"][detail[0]]
+            col = point_location["Vertical"][detail[1]]
+        '''
         
         return point_location_data
         
