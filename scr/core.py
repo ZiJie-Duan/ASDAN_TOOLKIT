@@ -66,7 +66,7 @@ class CORE_CONTROL():
         memoryCtrol = MEMORY_CONTROL()
         memoryCtrol.data = self.data
         memoryCtrol.period = self.period
-        memoryCtrol.result_list = self.memo_data
+        memoryCtrol.memo_data = self.memo_data
         if self.cmdlist == []:
             memoryCtrol.save_data("data.json")
         else:

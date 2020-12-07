@@ -28,3 +28,4 @@ class MEMORY_CONTROL():
 
         return self.data, self.period, self.memo_data
 
+
