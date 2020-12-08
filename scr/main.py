@@ -9,15 +9,15 @@ ASDAN 商赛辅助程序 使用教程
     EX：[/parameter] 方框内带有左斜线的参数，是可选填参数
 
 程序内部控制：
-    initmemory [/type] ---- 清除指定程序内存
+    im [/type] ---- 清除指定程序内存
         如不传入参数，将自动清除全部内存。
         type包含由["path","data","period","variate"]
 
-    rd_d [/path] ------ 指定读取数据文件（json文件）
+    red [/path] ------ 指定读取数据文件（json文件）
         path 为json的绝对路径，包含文件名称以及后缀
         如不填写参数，将在相对目录下读取 data.json
     
-    sv_d [/path] ------ 指定保存数据文件（json文件）
+    svd [/path] ------ 指定保存数据文件（json文件）
         path 为json的绝对路径，包含文件名称以及后缀
         如不填写参数，将在相对目录下保存 data.json
 
@@ -27,15 +27,15 @@ ASDAN 商赛辅助程序 使用教程
         name 为保存的名称，添加模式时，将由此name作为数据结构的键
         删除模式时，将删除由此名称组成的数据结构
     
-    ls_memory [schema] [/type] ------ 输出程序内部数据
-        schema 操作模式 具有 ["general","detail"] 两种运行模式
+    lsm [schema] [/type] ------ 输出程序内部数据
+        schema 操作模式 具有["g","d"] #general,detail 两种运行模式
         type 为指定的变量，包含由["path","data","period","variate"]
         默认全选
 
-    set_p [period] ------ 用于设置程序时间（游戏周期）的函数
+    setp [period] ------ 用于设置程序时间（游戏周期）的函数
         period 为一个数字
 
-    initdata ------- 根据周期生成数据结构
+    initd ------- 根据周期生成数据结构
 
     TRA [path] [translator] ------- 通过路径加载数据表
         path 为数据表的绝对路径，包含文件的后缀
@@ -47,8 +47,9 @@ ASDAN 商赛辅助程序 使用教程
     TSR [rendering] ------- 使用表格渲染器对数据进行处理
         rendering 为指定的渲染器
 
-    creat_table [path] ------- 生成报表
+    ct [path] [/memo]------- 生成报表
         path 为指定文件的生成路径
+        memo 只有 memo一个值，加入即可选择内存中的其他结果
 
     """)
 
@@ -57,15 +58,15 @@ def cmd_control(cmd,cmdlist,core):
     if cmd == "-h":
         print("运行 帮助")
         helper()
-    elif cmd == "initmemory":
+    elif cmd == "im":
         print("运行 初始化记忆")
         core.init_memory()
 
-    elif cmd == "rd_d":
+    elif cmd == "red":
         print("运行 读取数据")
         core.load_data()
 
-    elif cmd == "sv_d":
+    elif cmd == "svd":
         print("运行 保存数据")
         core.save_data()
     
@@ -73,11 +74,11 @@ def cmd_control(cmd,cmdlist,core):
         print("运行 运行memo记忆")
         core.memo()
     
-    elif cmd == "ls_memory":
+    elif cmd == "lsm":
         print("运行 memory查看器")
         core.list_memory()
 
-    elif cmd == "set_p":
+    elif cmd == "setp":
         print("运行 周期设置函数")
         core.set_period()
 
@@ -85,7 +86,7 @@ def cmd_control(cmd,cmdlist,core):
         print("运行 TRA 表格加载器")
         core.read_table()
 
-    elif cmd == "initdata":
+    elif cmd == "initd":
         print("运行 初始化数据结构函数")
         core.init_data_structure()
     
@@ -97,7 +98,7 @@ def cmd_control(cmd,cmdlist,core):
         print("运行 TSR 表格样式渲染器")
         core.table_style_rendering()
 
-    elif cmd == "creat_table":
+    elif cmd == "ct":
         print("运行 表格导出程序")
         core.table_writer()
     
