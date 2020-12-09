@@ -59,8 +59,17 @@ class ASDAN_TABLE_STYLE_RENDERING():
             point_location_data.append([row,col+3,detail[2]["Price"]])
             point_location_data.append([row,col+4,detail[2]["Sales_Volume"]])
             point_location_data.append([row,col+5,detail[2]["Market_Share"]])
-        
-        
+
+        col = 0 #数值为固定不变
+        for value in point_location["col"].values():
+            if col < int(value): #自动获取最大值
+                col = int(value) 
+        col = col + 6 #加一个格子用来留空
+        point_location_data.append([1,col,"total_salse"])
+        for business_code, value in self.data["total_salse"].items():
+            row = point_location["row"][business_code]
+            point_location_data.append([row,col,value])
+
         return point_location_data
         
         

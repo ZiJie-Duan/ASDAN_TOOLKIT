@@ -40,4 +40,3 @@ class ASDAN_ANALYZER():
         self.result["avg_price"] = avg_price
         self.result["total_salse"] = total_salse
         return self.result
-        
