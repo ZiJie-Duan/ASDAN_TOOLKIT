@@ -34,9 +34,19 @@ class ASDAN_ANALYZER():
                 table_content.append(table_content_son)
             
             total_salse[business_code] = business_total_sales_volume
+        
+        revenue = {}
+        for business_code, detail in business_city_data.items():
+            total_revenue = 0
+            for city_name, business_city_detail in detail.items():
+                price = business_city_detail["Price"]
+                sales_volume = business_city_detail["Sales_Volume"]
+                total_revenue += price*sales_volume
+            revenue[business_code] = total_revenue
 
         self.result["table_style"] = table_style
         self.result["content"] = table_content
         self.result["avg_price"] = avg_price
         self.result["total_salse"] = total_salse
+        self.result["revenue"] = revenue
         return self.result
