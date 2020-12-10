@@ -6,6 +6,7 @@ def helper():
     print("""
 
 ASDAN 商赛辅助程序 使用教程
+    "作者：Lucycore"
     EX：[/parameter] 方框内带有左斜线的参数，是可选填参数
 
 程序内部控制：
@@ -107,8 +108,7 @@ def cmd_control(cmd,cmdlist,core):
 
 
 def main():
-    print("ASDAN 商赛辅助分析程序 v1.1 Beta")
-    print("作者：Peter Duan")
+    print("ASDAN 商赛辅助分析程序 v1.0 Beta")
     print("初始化核心")
     core = CORE_CONTROL()
     '''
