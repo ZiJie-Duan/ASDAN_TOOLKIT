@@ -33,7 +33,7 @@ class MEMORY_CONTROL():
 class PERMISSION():
 
     def __init__(self):
-        self.host = "127.0.0.1"
+        self.host = "http://asdan.top"
         self.port = 2333
         self.data = "ASDAN_normal"
     
