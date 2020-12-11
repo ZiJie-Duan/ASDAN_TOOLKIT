@@ -1,4 +1,5 @@
 import json
+import socket
 
 class MEMORY_CONTROL():
     """
@@ -29,3 +30,36 @@ class MEMORY_CONTROL():
         return self.data, self.period, self.memo_data
 
 
+class PERMISSION():
+
+    def __init__(self):
+        self.host = "127.0.0.1"
+        self.port = 2333
+        self.data = "ASDAN_normal"
+    
+    def verify_permission(self):
+        try:
+            print("[verify_permission] 初始化程序自检")
+            # 创建 socket 对象
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+            # 连接服务，指定主机和端口
+            s.connect((self.host, self.port))
+
+            s.send(self.data.encode('utf-8'))
+            # 接收小于 1024 字节的数据
+            msg = s.recv(1024).decode()
+            s.close()
+
+            if msg == "TRUE":
+                print("[verify_permission] 程序自检成功")
+                return True
+            else:
+                print("[verify_permission] 程序自检失败，没有权限启动")
+                return False
+                
+        except:
+            print("[verify_permission] 程序自检失败，请检查您的计算机环境")
+            return False
+
+        

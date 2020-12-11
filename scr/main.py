@@ -1,6 +1,7 @@
 #ASDAN 商赛辅助分析程序
 from core import CORE_CONTROL
 import traceback
+import sys
 
 def helper():
     print("""
@@ -111,18 +112,10 @@ def main():
     print("ASDAN 商赛辅助分析程序 v1.0 Beta")
     print("初始化核心")
     core = CORE_CONTROL()
-    '''
-    while True:
-        user_cmd = input(">>")
-        user_cmd_list = user_cmd.split(" ")
-        cmd = user_cmd_list[0]
-        if len(user_cmd_list) < 2:
-            cmdlist = []
-        else:
-            cmdlist = user_cmd_list[1:]
-        cmd_control(cmd,cmdlist,core)
-        print("finish")
-    '''
+    if core.start_verify() == False:
+        print("按下回车退出程序")
+        sys.exit()
+
     print("进入cmd 控制循环")
     while True:
         try:
@@ -141,5 +134,6 @@ def main():
             print("\n程序发生致命错误！")
             traceback.print_exc()#错误捕捉器
             print("按下回车继续")
+            sys.exit()
 
 main()

@@ -3,6 +3,7 @@ from conduct import ASDAN_ANALYZER
 from result import ASDAN_TABLE_STYLE_RENDERING
 from assist import MEMORY_CONTROL
 from result import TABLE_WRITER
+from assist import PERMISSION
 import json
 
 class CORE_CONTROL():
@@ -46,6 +47,14 @@ class CORE_CONTROL():
         if "ana" in self.cmdlist:
             print("[init_memory] 初始化运算结果暂存器")
             self.ana_data = {}
+
+
+    def start_verify(self):
+        permission = PERMISSION()
+        if permission.verify_permission():
+            return True
+        else:
+            return False
 
 
     def set_period(self):
