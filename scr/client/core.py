@@ -122,6 +122,15 @@ class CORE_CONTROL():
             self.data = asdanExcelReader.asdan_city_table()
             print("[read_table] 读取完成，已存入 核心data数据")
 
+        if self.cmdlist[0] == "fcity":
+            print("[read_table] 运行表格读取器 “fast_city”")
+            asdanExcelReader = ASDAN_EXCEL_REDER()
+            asdanExcelReader.path = self.cmdlist[1]
+            asdanExcelReader.data = self.data
+            asdanExcelReader.period = self.period
+            self.data = asdanExcelReader.fast_asdan_city_table()
+            print("[read_table] 读取完成，已存入 核心data数据")
+
     def memo(self):
         # 用于进行程序内部变量存储的函数
         print("[CORE] MEMO 内存控制函数")

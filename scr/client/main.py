@@ -105,7 +105,8 @@ def cmd_control(cmd,cmdlist,core):
         core.table_writer()
     
     else:
-        print("命令无效")
+        if cmd != "":
+            print("命令无效")
 
 
 def main():
@@ -134,6 +135,5 @@ def main():
             print("\n程序发生致命错误！")
             traceback.print_exc()#错误捕捉器
             print("按下回车继续")
-            sys.exit()
 
 main()
