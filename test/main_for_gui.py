@@ -1,31 +1,36 @@
-# -*- coding: utf-8 -*-
+import sys
+from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+class picture(QWidget):
+    def __init__(self):
+        super(picture, self).__init__()
 
-"""
-Py40.com PyQt5 tutorial
+        self.resize(600, 400)
+        self.setWindowTitle("label显示图片")
 
-In this example, we create a simple
-window in PyQt5.
+        self.label = QLabel(self)
+        self.label.setText("   显示图片")
+        self.label.setFixedSize(300, 200)
+        self.label.move(160, 160)
 
-author: Jan Bodnar
-website: py40.com
-last edited: January 2015
-"""
+        self.label.setStyleSheet("QLabel{background:white;}"
+                                 "QLabel{color:rgb(300,300,300,120);font-size:10px;font-weight:bold;font-family:宋体;}"
+                                 )
+
+        btn = QPushButton(self)
+        btn.setText("打开图片")
+        btn.move(10, 30)
+        btn.clicked.connect(self.openimage)
+    def openimage(self):
+        imgName, imgType = QFileDialog.getOpenFileName(self, "打开图片", "", "*.jpg;;*.png;;All Files(*)")
+        jpg = QtGui.QPixmap(imgName).scaled(self.label.width(), self.label.height())
+        self.label.setPixmap(jpg)
 
 
-if __name__ == '__main__':
-    # 每一pyqt5应用程序必须创建一个应用程序对象。sys.argv参数是一个列表，从命令行输入参数。
-    app = QApplication(sys.argv)
-    # QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。
-    w = QWidget()
-    # resize()方法调整窗口的大小。这离是250px宽150px高
-    w.resize(250, 150)
-    # move()方法移动窗口在屏幕上的位置到x = 300，y = 300坐标。
-    w.move(300, 300)
-    # 设置窗口的标题
-    w.setWindowTitle('Simple')
-    # 显示在屏幕上
-    w.show()
-
-    # 系统exit()方法确保应用程序干净的退出
-    # 的exec_()方法有下划线。因为执行是一个Python关键词。因此，exec_()代替
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    my = picture()
+    my.show()
     sys.exit(app.exec_())
