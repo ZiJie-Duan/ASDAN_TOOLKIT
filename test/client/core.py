@@ -330,7 +330,7 @@ class CORE_GUI_CONTROL(QMainWindow,Ui_mainWindow):
 
 
     def initUI(self):
-        jpg = QtGui.QPixmap("/Users/lucy/Desktop/ASDAN_TOOLKIT/test/client/json.jpg").scaled(self.JASONface.width(), self.JASONface.height())
+        jpg = QtGui.QPixmap("json.jpg").scaled(self.JASONface.width(), self.JASONface.height())
         self.JASONface.setPixmap(jpg)
         self.select_input_file_path.clicked.connect(self.get_in_file_path)
         self.select_output_file_path.clicked.connect(self.get_out_file_path)

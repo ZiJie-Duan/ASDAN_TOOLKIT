@@ -6,9 +6,9 @@ import sys
 def helper():
     print("""
 
-ASDAN 商赛辅助程序 使用教程
+ASDAN_ToolKit V2.0 使用教程
     "作者：Lucycore"
-    EX：[/parameter] 方框内带有左斜线的参数，是可选填参数
+    Eg：[/parameter] 方框内带有左斜线的参数，是可选填参数
 
 程序内部控制：
     im [/type] ---- 清除指定程序内存
