@@ -39,4 +39,18 @@ class MEMORY_CONTROL():
             self.period, self.temporary_data]
         with open(self.set.database_path, 'w') as content:
             json.dump(all_data, content)
+    
+
+    def auto_save_data(self):
+        # this function is used for saving all the data automatically.
+        all_data = [self.original_data, self.processed_data, self.graphical_data,\
+            self.period, self.temporary_data]
+        databace_path = self.set.database_path[:-5] + "_autosave_.json"
+        with open(databace_path, 'w') as content:
+            json.dump(all_data, content)
+    
+    
+    def transfer_data(self):
+        
+
 
