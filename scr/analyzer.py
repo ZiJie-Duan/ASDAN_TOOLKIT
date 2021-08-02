@@ -6,6 +6,7 @@ class ASDAN_ANALYZER():
         self.set = None # here import the calss "setting" to access the basic setting.
 
 
+
     def asdan_normal_table_ana(self):
         # this function is used to build data structure whitch wirtes in the rusult table.
 

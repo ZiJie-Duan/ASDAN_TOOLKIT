@@ -1,5 +1,6 @@
 import json
-
+import time
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()))
 class MEMORY_CONTROL():
     """
     this class uses to store the memory of the whole program.
@@ -19,6 +20,7 @@ class MEMORY_CONTROL():
         self.graphical_data = {}
         self.period = "1" # round of game
         self.temporary_data = {}  # temporary storage
+        self.temporary_data_time_of_access = ""
 
 
     def load_data(self):
@@ -54,7 +56,8 @@ class MEMORY_CONTROL():
 
     
     def show_memory(self):
-        print("\n------------MEMORY------------")
+        print("\n-------------MEMORY-------------")
+        print("目前选定周期：{}".format(self.period))
         print("\n-----original_data占用情况-----")
         for period, data in self.original_data.items():
             if data == {}:
@@ -94,7 +97,7 @@ class MEMORY_CONTROL():
                     self.graphical_data[name2] = self.graphical_data[name]
 
 
-    def del_data(self,group,name):
+    def del_data(self,group,name=""):
         if group == "p":
             del self.processed_data[name]
         elif group == "g":
@@ -111,4 +114,5 @@ class MEMORY_CONTROL():
             self.period = period
         else:
             self.original_data[period] = {}
+            self.period = period
 

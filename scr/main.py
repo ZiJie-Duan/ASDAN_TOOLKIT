@@ -2,6 +2,13 @@
 from core import CORE_DRIVE
 import traceback
 
+'''
+1，分析器 加入数据选择功能
+2，完善 写入表格 数据类型
+3，加入表格读取 类型检测器
+4, 加入缓存时间刷新显示
+'''
+
 def helper():
     print("""
 

@@ -26,14 +26,23 @@ class CORE_DRIVE():
         self.writer.memo = self.memo
         self.writer.set = self.set
 
+    def path_clean(self,path):
+        # this function is used to remove the quotes on two side of path
+        if path[0] == "'" or path[0] == '"':
+            return path[1:-1]
+        else:
+            return path
+    
+
     def load_data(self):
         if len(self.cmdlist) == 0:
             print("[core] load data from database")
             self.memo.load_data()
             print("[core] Finish")
         elif len(self.cmdlist) == 1:
-            print("[core] load data from {}".format(self.cmdlist[0]))
-            self.set.path_of_database = self.cmdlist[0]
+            path = self.path_clean(self.cmdlist[0])
+            print("[core] load data from {}".format(path))
+            self.set.path_of_database = path
             self.memo.load_data()
             print("[core] Finish")
 
@@ -43,14 +52,16 @@ class CORE_DRIVE():
             self.memo.save_data()
             print("[core] Finish")
         elif len(self.cmdlist) == 1:
-            print("[core] save data to {}".format(self.cmdlist[0]))
-            self.set.path_of_database = self.cmdlist[0]
+            path = self.path_clean(self.cmdlist[0])
+            print("[core] save data to {}".format(path))
+            self.set.path_of_database = path
             self.memo.save_data()
             print("[core] Finish")
 
     def load_table(self):
-        print("[core] load table from {}".format(self.cmdlist[0]))
-        self.set.path_of_original_table = self.cmdlist[0]
+        path = self.path_clean(self.cmdlist[0])
+        print("[core] load table from {}".format(path))
+        self.set.path_of_original_table = path
         self.loader.asdan_city_loader()
         print("[core] Finish")
 
@@ -60,8 +71,9 @@ class CORE_DRIVE():
         print("[core] Finish")
 
     def write_table(self):
-        print("[core] write result {} data to {}".format(self.cmdlist[0],self.cmdlist[1]))
-        self.set.path_of_result_table = self.cmdlist[1]
+        path = self.path_clean(self.cmdlist[1])
+        print("[core] write result {} data to {}".format(self.cmdlist[0],path))
+        self.set.path_of_result_table = path
         self.writer.write(name=self.cmdlist[0])
         print("[core] Finish")
 
@@ -83,9 +95,14 @@ class CORE_DRIVE():
         self.memo.show_memory()
 
     def del_data(self):
-        print("[core] del data '{}' form '{}' group".format(self.cmdlist[1],self.cmdlist[0]))
-        self.memo.del_data(group=self.cmdlist[0],name=self.cmdlist[1])
-        print("[core] Finish")
+        if self.cmdlist[0] == "t":
+            print("[core] del data '{}' group".format(self.cmdlist[0]))
+            self.memo.del_data(group=self.cmdlist[0])
+            print("[core] Finish")
+        else:
+            print("[core] del data '{}' form '{}' group".format(self.cmdlist[1],self.cmdlist[0]))
+            self.memo.del_data(group=self.cmdlist[0],name=self.cmdlist[1])
+            print("[core] Finish")
 
     def change_period(self):
         print("[core] change period to {}".format(self.cmdlist[0]))
